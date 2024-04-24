@@ -30,25 +30,37 @@ The goal of this lab is to download and install Kali Linux virtual machine, Meta
 
 <h2>Installation steps</h2>
 
--  Step 1: Download and Install VMMWare Workstation
+-  Step 1: Download and Install VMMWare Workstation 
 
-I am going to head to the VMWare's site https://www.vmware.com/products/workstation-pro/workstation-pro-evaluation.html to download VMWare Workstation 17 Pro for Windows and then start the installation process. It is a straightforward process from there, but here is a <a href="https://www.youtube.com/watch?v=7kcqDy7aeGg">Tutorial</a>on how to install VMWare step by step.
-![image](https://github.com/danielbangm/SIEM-ressources/assets/22795502/5af7cf61-58b6-4e5f-892c-d1b09dd2d9a2)
-![image](https://github.com/danielbangm/SIEM-ressources/assets/22795502/ab5c4749-4849-4aed-be3c-b9ae132cbaaa)
+I am going to head to the VMWare's site https://www.vmware.com/products/workstation-pro/workstation-pro-evaluation.html to download VMWare Workstation 17 Pro for Windows and then start the installation process. It is a straightforward process from there, but here is a <a href="https://www.youtube.com/watch?v=7kcqDy7aeGg">Tutorial</a> on how to install VMWare step by step.
+<p align="center">
+<img src="https://shorturl.at/wABH2" />
+</p>
 
--  Step 2: Set up Log Analytics workspaces
+-  Step 2: Download and Install Kali Linux
 
-The purpose of this is to ingest logs from the Virtual Machine. We are going to ingest the Windows event logs and create our own custom logs that contains geographic information in order to discover where the attacker is coming from. To do that, just search for Log analytic workspaces on the portal and create one using the same ressource group. Then go on to Security center(Microsoft Defender for the Cloud) to enable the ability to gather logs from the virtual machine into the log analytic workspaces. Make sure to choose the log Analytics workspaces we just created and turn defender on and also data collection has to be set to "all". Finally go back to log Analytic workspaces and connect to the VM.
-![image](https://github.com/danielbangm/SIEM-ressources/assets/22795502/b5ca8d9e-57b8-4be7-87bb-03140eb1a75c)
+I am going to Download <a href="https://www.kali.org/get-kali/#kali-virtual-machines">Kali Linux</a> using the VMWare version and Install it on my local drive. Then use 7zip to extract file and launch the file with the ".vmx" extension with VMware 
+![image](https://github.com/danielbangm/Kali-Linux-VM/assets/22795502/86cba444-734d-4c1f-9f05-b10484b5d971)
+![image](https://github.com/danielbangm/Kali-Linux-VM/assets/22795502/a6fc32ac-a9b2-47f6-af76-cf74a6428857)
 
--  Step 3: Set up sentinel
+-  Step 3: Download and Install Metasploitable2
 
-We are going to use this as our SIEM to visualize the attack data. Just type azure sentinel in the search bar and create a new sentinel. Pick the log analytic workspaces we want to connect to oour logs.
-![image](https://github.com/danielbangm/SIEM-ressources/assets/22795502/a4ed62a2-fa02-439a-a4df-b40116ebbec9)
+I am going to download the <a href="https://sourceforge.net/projects/metasploitable/files/Metasploitable2/">Metasploitable2 Zip file</a> and bring up the VMWare session but lauching the ".vmx" file extension with VMWare. This should start the Virtual Machine with Username: msfadmin and Password: msfadmin
+![image](https://github.com/danielbangm/Kali-Linux-VM/assets/22795502/6cd638f3-ba76-4e06-a06f-d815bae30b71)
 
--  Step 4: Connect to VM using Remote Desk Connection
+-  Step 4: Start OpenVAS
 
-Click on virtual machine in portal.azure and copy the public IP of the VM. Go on your desktop and launch remote desk Connection(Microsoft RDP) using the VM's public ip address , username and password we created earlier. and we have access to our virtual machine...
-![image](https://github.com/danielbangm/SIEM-ressources/assets/22795502/e5fa5235-7e14-47f2-ae48-4a287af9e126)
+I will start the OpenVAS Process by bringing up a root console on Kali Linux and type the following command to start the services <b>gvm-start</b> . Then I change the password of the existing admin with the command <b>runuser-u _gvm -- gvmd --user=admin --new-password=admin</b>
+![image](https://github.com/danielbangm/Kali-Linux-VM/assets/22795502/7377d224-a9b5-4bb1-ba00-e211f0bd163d)
+
+- Step 5: Access OpenVAS
+
+To access OpenVAS and take a look, just open up the Firefox Browser and go to the OpenVAS URL: https://127.0.0.1:9392
+![image](https://github.com/danielbangm/Kali-Linux-VM/assets/22795502/7df7224c-621b-459b-a59f-7924f2af0de8)
+Next login with the Username:admin, Password: admin
+Once logged in, we see the main Dashboard view below: <b>Our initial Dashboard will be blank, because a Scan has not been run</b>
+![image](https://github.com/danielbangm/Kali-Linux-VM/assets/22795502/06f6e4c9-e9a6-4f47-a980-0aec78c5fb29)
+![image](https://github.com/danielbangm/Kali-Linux-VM/assets/22795502/64b86d8f-c6e2-40d9-8fa4-1b8f8b43574f)
+
 
 
